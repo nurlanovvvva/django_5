@@ -1,6 +1,9 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
 from .models import Director, Movie, Review
-from .serializers import DirectorSerializer, MovieSerializer, ReviewSerializer
+from .serializers import (
+    DirectorSerializer, MovieSerializer,
+    ReviewSerializer, DirectorWithMoviesCountSerializer,
+    MovieWithReviewsSerializer)
 
 
 # Director
@@ -34,3 +37,13 @@ class ReviewListAPIView(ListCreateAPIView):
 class ReviewDetailAPIView(RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+
+class MovieWithReviewsListAPIView(ListAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieWithReviewsSerializer
+
+
+class DirectorWithMoviesCountListAPIView(ListAPIView):
+    queryset = Director.objects.all()
+    serializer_class = DirectorWithMoviesCountSerializer
